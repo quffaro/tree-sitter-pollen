@@ -1,0 +1,7 @@
+node_modules/
+build/
+*.log
+.DS_Store
+src/*.json
+src/*.c
+src/*.h

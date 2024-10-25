@@ -1,0 +1,14 @@
+{
+  "name": "tree-sitter-pollen",
+  "version": "1.0.0",
+  "description": "Tree Sitter for Pollen on Helix",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Matt Cuffaro",
+  "license": "ISC",
+  "devDependencies": {
+    "tree-sitter-cli": "^0.24.3"
+  }
+}
