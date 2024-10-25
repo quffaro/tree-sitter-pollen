@@ -1,0 +1,53 @@
+==================
+Command with bracket args
+==================
+
+◊list[item1 item2]
+
+---
+
+(source_file
+  (command
+    (identifier)
+    (bracket_args
+      (text)
+      (text))))
+
+==================
+Command with brace args
+==================
+
+◊para{Some text}
+
+---
+
+(source_file
+  (command
+    (identifier)
+    (brace_args
+      (text))))
+
+==================
+Nested commands
+==================
+
+◊section[
+  ◊title{Introduction}
+  ◊list[item1 item2]
+]
+
+---
+
+(source_file
+  (command
+    (identifier)
+    (bracket_args
+      (command
+        (identifier)
+        (brace_args
+          (text)))
+      (command
+        (identifier)
+        (bracket_args
+          (text)
+          (text))))))

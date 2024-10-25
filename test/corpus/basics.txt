@@ -1,0 +1,49 @@
+==================
+Basic commands
+==================
+
+◊title{My Document}
+◊author{John Doe}
+
+---
+
+(source_file
+  (command
+    (identifier)
+	(brace_args
+	  (text)))
+  (command
+    (identifier)
+	(brace_args
+	  (text)))
+  (text))
+
+==================
+Nested structures
+==================
+
+◊section{
+  ◊title{Introduction}
+  ◊p{This is a paragraph with ◊em{emphasized} text.}
+}
+
+---
+
+(source_file
+  (command
+    (identifier)
+	(brace_args
+	  (command
+		(identifier)
+		(brace_args
+		  (text)))
+	  (command
+	    (identifier)
+		(brace_args
+		  (text)
+		  (command
+		    (identifier)
+			(brace_args
+			  (text)))
+		(text)))))
+		(text))

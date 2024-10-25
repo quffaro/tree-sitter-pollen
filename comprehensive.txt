@@ -1,0 +1,96 @@
+==================
+Mixed content
+==================
+
+<div class="container">
+  ◊title{Hello}
+  <p>
+    Normal text with ◊bold{emphasized} parts
+    ◊list[
+      ◊item{First}
+      ◊item{Second}
+    ]
+  </p>
+</div>
+
+---
+
+(source_file
+  (tag
+    (identifier)
+    (attribute
+      (identifier)
+      (string))
+    (command
+      (identifier)
+      (brace_args
+        (text)))
+    (tag
+      (identifier)
+      (text)
+      (command
+        (identifier)
+        (brace_args
+          (text)))
+      (text)
+      (command
+        (identifier)
+        (bracket_args
+          (command
+            (identifier)
+            (brace_args
+              (text)))
+          (command
+            (identifier)
+            (brace_args
+              (text))))))))
+
+==================
+Self-closing tags
+==================
+
+<div>
+  <img src="image.jpg" />
+  ◊caption{A nice image}
+</div>
+
+---
+
+(source_file
+  (tag
+    (identifier)
+    (tag
+      (identifier)
+      (attribute
+        (identifier)
+        (string)))
+    (command
+      (identifier)
+      (brace_args
+        (text)))))
+
+==================
+Comments and whitespace
+==================
+
+; This is a comment
+<div>
+  ◊para{
+    Some text
+    ; Inline comment
+    More text
+  }
+</div>
+
+---
+
+(source_file
+  (comment)
+  (tag
+    (identifier)
+    (command
+      (identifier)
+      (brace_args
+        (text)
+        (comment)
+        (text)))))

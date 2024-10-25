@@ -3,13 +3,16 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
-  // Remove the unnecessary conflict
+  conflicts: $ => [
+    [$._expression, $.tag_content]
+  ],
+
   precedences: $ => [
     [
       'command_args',
-      'bare_command'
-    ],
-    ['tag_content']  // Add precedence for tag_content
+      'bare_command',
+      $.tag_content
+    ]
   ],
 
   rules: {
@@ -23,7 +26,7 @@ module.exports = grammar({
       $.lozenge_command
     ),
 
-    // Modified tag rule to be more explicit
+    // Modified tag rule with explicit content handling
     tag: $ => choice(
       // Self-closing tag
       seq(
@@ -32,18 +35,21 @@ module.exports = grammar({
         repeat($.attribute),
         '/>'
       ),
-      // Tag with content - use prec to handle nesting
-      prec('tag_content', seq(
+      // Tag with content
+      seq(
         '<',
         $.identifier,
         repeat($.attribute),
         '>',
-        repeat($._expression),
+        optional($.tag_content),
         '</',
         $.identifier,
         '>'
-      ))
+      )
     ),
+
+    // Separate rule for tag content
+    tag_content: $ => repeat1($._expression),
 
     command: $ => prec.dynamic(1, choice(
       prec('command_args', seq(
@@ -92,8 +98,7 @@ module.exports = grammar({
       )
     ),
 
-    // Make text more specific to avoid conflicts
-    text: $ => token(prec(-1, /[^◊{}<>\[\]]+/)),
+    text: $ => /[^◊{}<>\[\]]+/,
 
     string: $ => choice(
       seq('"', /[^"]*/, '"'),
