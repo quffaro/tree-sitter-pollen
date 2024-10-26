@@ -1,20 +1,13 @@
-; queries/highlights.scm
-
-; Commands
+; Highlight function names after the lozenge
 (command
-  identifier: (identifier) @function)
+  (identifier) @function)
 
-; Strings
-(string) @string
+; Highlight the lozenge
+"◊" @punctuation.special
 
-; Comments
+; Highlight braces
+"{" @punctuation.bracket
+"}" @punctuation.bracket
+
+; Highlight comments
 (comment) @comment
-
-; Numbers
-(number) @number
-
-; Lists
-(list) @punctuation.bracket
-
-; Identifiers in other contexts
-(identifier) @variable

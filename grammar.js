@@ -1,110 +1,33 @@
 module.exports = grammar({
   name: 'pollen',
 
-  word: $ => $.identifier,
-
-  // Remove the unnecessary conflict
-  precedences: $ => [
-    [
-      'command_args',
-      'bare_command'
-    ],
-    ['tag_content']  // Add precedence for tag_content
+  extras: $ => [
+    /\s/,
+    $.comment
   ],
 
   rules: {
-    source_file: $ => repeat($._expression),
+    source: $ => repeat($._expression),
 
     _expression: $ => choice(
       $.command,
-      $.text,
-      $.tag,
-      $.comment,
-      $.lozenge_command
+      $.text
     ),
 
-    // Modified tag rule to be more explicit
-    tag: $ => choice(
-      // Self-closing tag
-      seq(
-        '<',
-        $.identifier,
-        repeat($.attribute),
-        '/>'
-      ),
-      // Tag with content - use prec to handle nesting
-      prec('tag_content', seq(
-        '<',
-        $.identifier,
-        repeat($.attribute),
-        '>',
-        repeat($._expression),
-        '</',
-        $.identifier,
-        '>'
-      ))
-    ),
-
-    command: $ => prec.dynamic(1, choice(
-      prec('command_args', seq(
-        '◊',
-        $.identifier,
-        choice(
-          $.bracket_args,
-          $.brace_args
-        )
-      )),
-      prec('bare_command', seq(
-        '◊',
-        $.identifier
-      ))
-    )),
-
-    bracket_args: $ => seq(
-      '[',
-      repeat($._expression),
-      ']'
-    ),
-
-    brace_args: $ => seq(
-      '{',
-      repeat($._expression),
-      '}'
-    ),
-
-    lozenge_command: $ => seq(
-      '{',
+    command: $ => seq(
       '◊',
       $.identifier,
-      optional(choice(
-        $.bracket_args,
-        $.brace_args
-      )),
-      '}'
+      optional(seq(
+        '{',
+        optional($._expression),
+        '}'
+      ))
     ),
 
-    attribute: $ => seq(
-      $.identifier,
-      '=',
-      choice(
-        $.string,
-        $.identifier
-      )
-    ),
+    identifier: $ => /[a-zA-Z][a-zA-Z0-9-]*/,
+    
+    text: $ => /[^◊]+/,
 
-    // Make text more specific to avoid conflicts
-    text: $ => token(prec(-1, /[^◊{}<>\[\]]+/)),
-
-    string: $ => choice(
-      seq('"', /[^"]*/, '"'),
-      seq("'", /[^']*/, "'")
-    ),
-
-    comment: $ => seq(
-      ';',
-      /.*/
-    ),
-
-    identifier: $ => /[a-zA-Z\-_!?+<>=%*]+/
+    comment: $ => seq(';', /.*/),
   }
 });
