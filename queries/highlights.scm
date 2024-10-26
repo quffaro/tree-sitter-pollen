@@ -4,17 +4,6 @@
 (command
   identifier: (identifier) @function)
 
-(lozenge_command
-  identifier: (identifier) @function)
-
-; Tags
-(tag
-  identifier: (identifier) @tag)
-
-; Attributes in tags
-(attribute
-  (identifier) @property)
-
 ; Strings
 (string) @string
 
