@@ -18,7 +18,7 @@
 enum ts_symbol_identifiers {
   anon_sym_LBRACK = 1,
   anon_sym_RBRACK = 2,
-  anon_sym_POUND_COLON = 3,
+  sym_kwarg_command = 3,
   anon_sym_SPACE = 4,
   sym_string = 5,
   sym_number = 6,
@@ -48,7 +48,7 @@ static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [anon_sym_LBRACK] = "[",
   [anon_sym_RBRACK] = "]",
-  [anon_sym_POUND_COLON] = "#:",
+  [sym_kwarg_command] = "kwarg_command",
   [anon_sym_SPACE] = " ",
   [sym_string] = "string",
   [sym_number] = "number",
@@ -78,7 +78,7 @@ static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [anon_sym_LBRACK] = anon_sym_LBRACK,
   [anon_sym_RBRACK] = anon_sym_RBRACK,
-  [anon_sym_POUND_COLON] = anon_sym_POUND_COLON,
+  [sym_kwarg_command] = sym_kwarg_command,
   [anon_sym_SPACE] = anon_sym_SPACE,
   [sym_string] = sym_string,
   [sym_number] = sym_number,
@@ -117,9 +117,9 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [anon_sym_POUND_COLON] = {
+  [sym_kwarg_command] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [anon_sym_SPACE] = {
     .visible = true,
@@ -321,7 +321,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_RBRACK);
       END_STATE();
     case 9:
-      ACCEPT_TOKEN(anon_sym_POUND_COLON);
+      ACCEPT_TOKEN(sym_kwarg_command);
       END_STATE();
     case 10:
       ACCEPT_TOKEN(anon_sym_SPACE);
@@ -458,7 +458,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [anon_sym_LBRACK] = ACTIONS(1),
     [anon_sym_RBRACK] = ACTIONS(1),
-    [anon_sym_POUND_COLON] = ACTIONS(1),
+    [sym_kwarg_command] = ACTIONS(1),
     [sym_string] = ACTIONS(1),
     [sym_number] = ACTIONS(1),
     [anon_sym_LBRACE] = ACTIONS(1),
@@ -684,7 +684,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(72), 1,
       anon_sym_RBRACK,
     ACTIONS(74), 1,
-      anon_sym_POUND_COLON,
+      sym_kwarg_command,
     STATE(16), 1,
       sym_comment,
     STATE(17), 1,
@@ -697,7 +697,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(76), 1,
       anon_sym_RBRACK,
     ACTIONS(78), 1,
-      anon_sym_POUND_COLON,
+      sym_kwarg_command,
     STATE(23), 1,
       sym_kwarg,
     STATE(17), 2,
@@ -707,7 +707,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       anon_sym_SEMI,
     ACTIONS(74), 1,
-      anon_sym_POUND_COLON,
+      sym_kwarg_command,
     STATE(16), 1,
       aux_sym_kwargs_repeat1,
     STATE(18), 1,
@@ -730,7 +730,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_comment,
     ACTIONS(83), 2,
       anon_sym_RBRACK,
-      anon_sym_POUND_COLON,
+      sym_kwarg_command,
   [330] = 3,
     ACTIONS(3), 1,
       anon_sym_SEMI,
@@ -755,7 +755,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_comment,
     ACTIONS(89), 2,
       anon_sym_RBRACK,
-      anon_sym_POUND_COLON,
+      sym_kwarg_command,
   [365] = 3,
     ACTIONS(91), 1,
       anon_sym_SPACE,

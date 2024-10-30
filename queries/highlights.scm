@@ -5,6 +5,8 @@
 ; Highlight the lozenge
 "◊" @punctuation.special
 
+(kwarg_command) @kwarg_command
+
 ; Highlight braces
 "{" @punctuation.bracket
 "}" @punctuation.bracket

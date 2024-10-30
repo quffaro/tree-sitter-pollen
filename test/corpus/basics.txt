@@ -95,6 +95,7 @@ Keywords
     (identifier)
 	(kwargs
 	  (kwarg
+	    (kwarg_command)
 	    (kwarg_identifier)
 		(string)))
 	(arg

@@ -64,6 +64,10 @@
       "required": true,
       "types": [
         {
+          "type": "kwarg_command",
+          "named": true
+        },
+        {
           "type": "kwarg_identifier",
           "named": true
         },
@@ -132,10 +136,6 @@
     "named": false
   },
   {
-    "type": "#:",
-    "named": false
-  },
-  {
     "type": ";",
     "named": false
   },
@@ -146,6 +146,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "kwarg_command",
+    "named": true
   },
   {
     "type": "number",

@@ -46,12 +46,16 @@
         }
       ]
     },
+    "kwarg_command": {
+      "type": "STRING",
+      "value": "#:"
+    },
     "kwarg": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "#:"
+          "type": "SYMBOL",
+          "name": "kwarg_command"
         },
         {
           "type": "SYMBOL",

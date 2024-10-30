@@ -21,8 +21,10 @@ module.exports = grammar({
       ']'
     ),
 
+    kwarg_command: $ => "#:",
+
     kwarg: $ => seq(
-	  "#:",
+	  $.kwarg_command,
 	  $.kwarg_identifier,
       ' ',
       choice($.string, $.number)
