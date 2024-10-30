@@ -21,7 +21,7 @@ module.exports = grammar({
       ']'
     ),
 
-    kwarg_command: $ => "#:",
+    kwarg_command: $ => token("#:"),
 
     kwarg: $ => seq(
 	  $.kwarg_command,

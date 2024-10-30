@@ -47,8 +47,11 @@
       ]
     },
     "kwarg_command": {
-      "type": "STRING",
-      "value": "#:"
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "#:"
+      }
     },
     "kwarg": {
       "type": "SEQ",
