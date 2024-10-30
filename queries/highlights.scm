@@ -1,15 +1,37 @@
-; Highlight function names after the lozenge
+; Commands and functions
 (command
   (identifier) @function)
 
-; Highlight the lozenge
+; The lozenge symbol
 "◊" @punctuation.special
 
-(kwarg_command) @kwarg_command
+; Keyword arguments
+"#:" @keyword
+(kwarg
+  (kwarg_identifier) @variable.parameter)
 
-; Highlight braces
+; Strings and numbers in kwargs
+(kwarg
+  (string) @string)
+(kwarg
+  (number) @number)
+
+; Brackets for kwargs
+"[" @punctuation.bracket
+"]" @punctuation.bracket
+
+; Braces for arguments
 "{" @punctuation.bracket
 "}" @punctuation.bracket
 
-; Highlight comments
+; Comments
 (comment) @comment
+
+; Regular text content
+(text) @text
+
+; Escaped characters in text
+(text) @string.escape
+
+; Optional: highlight the entire kwarg structure
+(kwargs) @keyword.operator
