@@ -6,9 +6,7 @@
 "◊" @punctuation.special
 
 ; Keyword arguments
-"#:" @keyword
-(kwarg
-  (kwarg_identifier) @variable.parameter)
+(kwarg_command) @kwarg_command
 
 ; Strings and numbers in kwargs
 (kwarg
