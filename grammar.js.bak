@@ -1,0 +1,41 @@
+module.exports = grammar({
+  name: 'pollen',
+
+  extras: $ => [
+    /\s/,
+    $.comment
+  ],
+
+  rules: {
+    source: $ => repeat($._expression),
+
+    _expression: $ => choice(
+      $.command,
+      $.text
+    ),
+
+    kwargs: $ => seq(
+      '[',
+      $.text,
+      ']'
+    ),
+
+    arg: $ => seq(
+      '{',
+      $._expression,
+      '}'
+    ),
+
+    command: $ => seq(
+      '◊',
+      $.identifier,
+      $.arg
+    ),
+
+    identifier: $ => /[a-zA-Z][a-zA-Z0-9-]*/,
+    
+    text: $ => /[^◊{}]+/,
+
+    comment: $ => seq(';', /.*/),
+  }
+});
